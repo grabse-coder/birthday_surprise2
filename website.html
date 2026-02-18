@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alles Gute zum 21. Geburtstag</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        padding: 50px;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        text-align: center;
+        width: 420px;
+        color: white;
+    }
+
+    h1 {
+        color: #ffd700;
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: #ddd;
+        margin-bottom: 25px;
+    }
+
+    button {
+        background: linear-gradient(135deg, #ffd700, #ffb300);
+        color: #111;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: bold;
+        margin: 8px 0;
+        width: 100%;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255,215,0,0.7);
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    input[type="date"] {
+        padding: 10px;
+        width: 100%;
+        border-radius: 10px;
+        border: none;
+        margin-top: 15px;
+        font-size: 16px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="landing">
+    <h1>✨ Alles Gute zum 21. Geburtstag ✨</h1>
+    <button onclick="showDates()">Weiter</button>
+</div>
+
+<div class="container hidden" id="dates">
+    <h1>🌙 Wähle dein Date</h1>
+
+    <button onclick="selectIdea('Drink & Paint 🎨🍷')">🎨 Drink & Paint</button>
+    <button onclick="selectIdea('Spa Day 💆‍♀️✨')">💆‍♀️ Spa Day</button>
+    <button onclick="selectIdea('Shopping Tag in Roermond 🛍️🇳🇱')">🛍️ Shopping Tag in Roermond</button>
+
+    <div id="dateSection" class="hidden">
+        <p>📅 Wähle dein Wunschdatum:</p>
+        <input type="date" id="chosenDate">
+        <button onclick="sendWhatsApp()">Per WhatsApp bestätigen</button>
+    </div>
+</div>
+
+<script>
+
+let selectedIdea = "";
+
+function showDates() {
+    document.getElementById("landing").classList.add("hidden");
+    document.getElementById("dates").classList.remove("hidden");
+}
+
+function selectIdea(idea) {
+    selectedIdea = idea;
+    document.getElementById("dateSection").classList.remove("hidden");
+}
+
+function sendWhatsApp() {
+    const date = document.getElementById("chosenDate").value;
+
+    if (!date) {
+        alert("Bitte wähle ein Datum 😊");
+        return;
+    }
+
+    const message = `Ich wähle das Date: ${selectedIdea} am ${date} 💛`;
+
+    // HIER DEINE NUMMER EINTRAGEN (mit Ländervorwahl ohne +)
+    const phoneNumber = "4917660194796";
+
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+}
+
+</script>
+
+</body>
+</html>
